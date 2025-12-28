@@ -10,7 +10,10 @@
       name="description"
       content="Spécialiste des infrastructures scolaires et municipales en Algérie : réseaux VLAN, Wi-Fi sécurisé, firewall pfSense, serveurs et sauvegardes."
     />
-    <link rel="canonical" href="https://xboxmomo23.github.io/infra-salama.github.io/" />
+    <link
+      rel="canonical"
+      href="https://xboxmomo23.github.io/infra-salama.github.io/"
+    />
 
     <meta
       property="og:title"
@@ -21,7 +24,10 @@
       content="Réseaux, Wi-Fi, pfSense, serveurs et sauvegardes pour moderniser votre établissement."
     />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://xboxmomo23.github.io/infra-salama.github.io/" />
+    <meta
+      property="og:url"
+      content="https://xboxmomo23.github.io/infra-salama.github.io/"
+    />
     <meta
       property="og:image"
       content="https://xboxmomo23.github.io/infra-salama.github.io/img/og-accueil.jpg"
@@ -75,7 +81,7 @@
   </head>
 
   <body>
-    <!-- Navigation -->
+    <!-- Navigation avec sous-menu Solutions -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
       <div class="container">
         <a class="navbar-brand" href="index.html">
@@ -100,23 +106,39 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link active" href="index.html">Accueil</a>
+              <a class="nav-link" href="index.html">Accueil</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="services.html">Nos Solutions</a>
+
+            <!-- NOUVEAU: Menu déroulant Nos Solutions -->
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarSolutions"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Nos Solutions
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarSolutions">
+                <li>
+                  <a class="dropdown-item" href="infrastructure.html">
+                    <i class="fas fa-network-wired me-2"></i>Infrastructure IT
+                  </a>
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item" href="edupilot.html">
+                    <i class="fas fa-graduation-cap me-2"></i>EduPilot
+                  </a>
+                </li>
+              </ul>
             </li>
-            <!-- <li class="nav-item">
-              <a class="nav-link" href="realisations.html">Réalisations</a>
-            </li> -->
+
             <li class="nav-item">
               <a class="nav-link" href="faq.html">FAQ</a>
             </li>
-            <!-- <li class="nav-item">
-                        <a class="nav-link" href="blog.html">Blog</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="temoignages.html">Témoignages</a>
-                    </li> -->
             <li class="nav-item">
               <a class="nav-link" href="recrutement.html">Recrutement</a>
             </li>
@@ -127,9 +149,9 @@
               <a class="nav-link" href="contact.html">Contact</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link btn btn-primary devis-btn" href="devis.html"
-                >Demander un devis</a
-              >
+              <a class="nav-link btn btn-primary devis-btn" href="devis.html">
+                Demander un devis
+              </a>
             </li>
           </ul>
         </div>

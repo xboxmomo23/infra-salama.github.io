@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      EduPilot | Plateforme de gestion scolaire moderne | Infra Salama
+    </title>
+    <meta
+      name="description"
+      content="EduPilot : solution complète de gestion scolaire développée par Infra Salama. Emplois du temps, notes, présences, communication école-parents."
+    />
+    <link rel="canonical" href="https://infrasalama.com/edupilot.html" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- EduPilot Specific Styles -->
+    <style>
+      /* Hero Section EduPilot */
+      .edupilot-hero {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 180px 0 120px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .edupilot-hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+        opacity: 0.4;
+      }
+
+      .edupilot-hero .container {
+        position: relative;
+        z-index: 2;
+      }
+
+      .edupilot-hero h1 {
+        font-size: 3.5rem;
+        font-weight: 800;
+        color: #fff;
+        margin-bottom: 1.5rem;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .edupilot-hero p.lead {
+        font-size: 1.4rem;
+        color: rgba(255, 255, 255, 0.95);
+        margin-bottom: 2.5rem;
+        line-height: 1.7;
+      }
+
+      .edupilot-hero .btn {
+        padding: 15px 40px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        border-radius: 50px;
+        margin: 0 10px 10px 0;
+        transition: all 0.3s ease;
+      }
+
+      .edupilot-hero .btn-light {
+        background: #fff;
+        color: #667eea;
+        border: none;
+      }
+
+      .edupilot-hero .btn-light:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      }
+
+      .edupilot-hero .btn-outline-light {
+        border: 2px solid #fff;
+        color: #fff;
+      }
+
+      .edupilot-hero .btn-outline-light:hover {
+        background: #fff;
+        color: #667eea;
+        transform: translateY(-3px);
+      }
+
+      /* Video Section */
+      .video-section {
+        padding: 80px 0;
+        background: #f8f9fa;
+      }
+
+      .video-container {
+        position: relative;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        background: #000;
+      }
+
+      .video-placeholder {
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 ratio */
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      }
+
+      .video-placeholder img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.3;
+      }
+
+      .play-button {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100px;
+        height: 100px;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        z-index: 10;
+      }
+
+      .play-button:hover {
+        transform: translate(-50%, -50%) scale(1.1);
+        background: #fff;
+      }
+
+      .play-button i {
+        font-size: 40px;
+        color: #667eea;
+        margin-left: 5px;
+      }
+
+      /* Feature Cards */
+      .features-section {
+        padding: 100px 0;
+      }
+
+      .feature-card {
+        background: #fff;
+        border-radius: 15px;
+        padding: 40px 30px;
+        height: 100%;
+        border: 1px solid #e0e0e0;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .feature-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 5px;
+        height: 100%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        transform: scaleY(0);
+        transition: transform 0.3s ease;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(102, 126, 234, 0.15);
+      }
+
+      .feature-card:hover::before {
+        transform: scaleY(1);
+      }
+
+      .feature-icon {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 25px;
+        font-size: 35px;
+        color: #fff;
+        transition: all 0.3s ease;
+      }
+
+      .feature-card:hover .feature-icon {
+        transform: rotate(5deg) scale(1.05);
+      }
+
+      .feature-card h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 15px;
+      }
+
+      .feature-card p {
+        color: #666;
+        line-height: 1.7;
+      }
+
+      /* Benefits Section */
+      .benefits-section {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 100px 0;
+        color: #fff;
+      }
+
+      .benefit-item {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        padding: 30px;
+        margin-bottom: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
+      }
+
+      .benefit-item:hover {
+        background: rgba(255, 255, 255, 0.15);
+        transform: translateX(10px);
+      }
+
+      .benefit-item i {
+        font-size: 40px;
+        margin-bottom: 15px;
+        color: #fff;
+      }
+
+      .benefit-item h4 {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+
+      /* Infra Salama Connection */
+      .infra-connection {
+        padding: 100px 0;
+        background: #fff;
+      }
+
+      .infra-badge {
+        display: inline-block;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: #fff;
+        padding: 10px 25px;
+        border-radius: 50px;
+        font-weight: 600;
+        margin-bottom: 20px;
+      }
+
+      .infra-connection .section-title {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: #333;
+        margin-bottom: 30px;
+      }
+
+      .infra-logo-container {
+        background: #f8f9fa;
+        border-radius: 20px;
+        padding: 40px;
+        text-align: center;
+      }
+
+      .infra-logo-container img {
+        max-width: 300px;
+        margin-bottom: 30px;
+      }
+
+      /* CTA Section */
+      .cta-edupilot {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 100px 0;
+        color: #fff;
+        text-align: center;
+      }
+
+      .cta-edupilot h2 {
+        font-size: 3rem;
+        font-weight: 800;
+        margin-bottom: 20px;
+      }
+
+      .cta-edupilot p {
+        font-size: 1.3rem;
+        margin-bottom: 40px;
+        opacity: 0.95;
+      }
+
+      .cta-edupilot .btn {
+        padding: 18px 50px;
+        font-size: 1.2rem;
+        font-weight: 700;
+        border-radius: 50px;
+        margin: 0 10px 10px 0;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .edupilot-hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .edupilot-hero p.lead {
+          font-size: 1.1rem;
+        }
+
+        .cta-edupilot h2 {
+          font-size: 2rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <img
+            src="img/logoInfraSalama.png"
+            alt="Infra Salama Logo"
+            height="50"
+          />
+          Infra Salama
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Accueil</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle active"
+                href="#"
+                id="navbarSolutions"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Nos Solutions
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarSolutions">
+                <li>
+                  <a class="dropdown-item" href="infrastructure.html">
+                    <i class="fas fa-network-wired me-2"></i>Infrastructure IT
+                  </a>
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item active" href="edupilot.html">
+                    <i class="fas fa-graduation-cap me-2"></i>EduPilot
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="faq.html">FAQ</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="recrutement.html">Recrutement</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="blog.html">Blog / conseil</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link btn btn-primary devis-btn" href="devis.html">
+                Demander un devis
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="edupilot-hero">
+      <div class="container">
+        <div class="row justify-content-center text-center">
+          <div class="col-lg-10" data-aos="fade-up">
+            <h1>EduPilot</h1>
+            <p class="lead">
+              La plateforme numérique complète pour moderniser la gestion de
+              votre établissement scolaire
+            </p>
+            <div class="hero-buttons">
+              <a href="#demo" class="btn btn-light btn-lg">
+                <i class="fas fa-play-circle me-2"></i>Demander une démo
+              </a>
+              <a href="contact.html" class="btn btn-outline-light btn-lg">
+                <i class="fas fa-envelope me-2"></i>Nous contacter
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="video-section">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-10" data-aos="fade-up">
+            <div class="text-center mb-5">
+              <h2 class="section-title">Découvrez EduPilot en vidéo</h2>
+              <p class="section-subtitle">
+                Une démonstration complète de la plateforme
+              </p>
+            </div>
+            <div class="video-container">
+              <div class="video-placeholder">
+                <!-- Placeholder image - à remplacer -->
+                <img
+                  src="img/edupilot/video-placeholder.jpg"
+                  alt="EduPilot Demo"
+                />
+                <div
+                  class="play-button"
+                  onclick="alert('Vidéo bientôt disponible!')"
+                >
+                  <i class="fas fa-play"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Presentation Section -->
+    <section class="features-section">
+      <div class="container">
+        <div class="row justify-content-center mb-5">
+          <div class="col-lg-8 text-center" data-aos="fade-up">
+            <h2 class="section-title">Qu'est-ce qu'EduPilot ?</h2>
+            <p class="lead">
+              EduPilot est une solution de gestion scolaire complète, développée
+              par Infra Salama pour digitaliser et simplifier la gestion
+              quotidienne des établissements éducatifs en Algérie.
+            </p>
+          </div>
+        </div>
+
+        <div class="row justify-content-center mb-5">
+          <div class="col-lg-10" data-aos="fade-up">
+            <div class="text-center p-5 bg-light rounded-3">
+              <h3 class="mb-4">À qui s'adresse EduPilot ?</h3>
+              <div class="row">
+                <div class="col-md-3 mb-3">
+                  <div class="p-3">
+                    <i
+                      class="fas fa-school fa-3x mb-3"
+                      style="color: #667eea"
+                    ></i>
+                    <h5>Écoles primaires</h5>
+                  </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                  <div class="p-3">
+                    <i
+                      class="fas fa-book fa-3x mb-3"
+                      style="color: #764ba2"
+                    ></i>
+                    <h5>Collèges</h5>
+                  </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                  <div class="p-3">
+                    <i
+                      class="fas fa-university fa-3x mb-3"
+                      style="color: #667eea"
+                    ></i>
+                    <h5>Lycées</h5>
+                  </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                  <div class="p-3">
+                    <i
+                      class="fas fa-building fa-3x mb-3"
+                      style="color: #764ba2"
+                    ></i>
+                    <h5>Établissements privés</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Features Grid -->
+        <div class="row">
+          <div
+            class="col-lg-4 col-md-6 mb-4"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="fas fa-calendar-alt"></i>
+              </div>
+              <h3>Emplois du temps</h3>
+              <p>
+                Création et gestion automatisée des emplois du temps pour les
+                élèves, professeurs et salles. Optimisation intelligente des
+                ressources.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-lg-4 col-md-6 mb-4"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="fas fa-graduation-cap"></i>
+              </div>
+              <h3>Notes & Bulletins</h3>
+              <p>
+                Saisie des notes, calcul automatique des moyennes, génération de
+                bulletins personnalisés et suivi des performances.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-lg-4 col-md-6 mb-4"
+            data-aos="fade-up"
+            data-aos-delay="300"
+          >
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="fas fa-user-check"></i>
+              </div>
+              <h3>Présences</h3>
+              <p>
+                Gestion digitale des présences et absences. Notifications
+                automatiques aux parents en temps réel.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-lg-4 col-md-6 mb-4"
+            data-aos="fade-up"
+            data-aos-delay="400"
+          >
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="fas fa-comments"></i>
+              </div>
+              <h3>Communication</h3>
+              <p>
+                Canal de communication direct entre école, parents et élèves.
+                Messages, annonces, réunions et événements.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-lg-4 col-md-6 mb-4"
+            data-aos="fade-up"
+            data-aos-delay="500"
+          >
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              <h3>Dashboards Professeurs</h3>
+              <p>
+                Interface dédiée pour les enseignants : gestion de classe,
+                cahier de texte numérique, suivi des élèves.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-lg-4 col-md-6 mb-4"
+            data-aos="fade-up"
+            data-aos-delay="600"
+          >
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="fas fa-cogs"></i>
+              </div>
+              <h3>Gestion Administrative</h3>
+              <p>
+                Tableau de bord complet pour l'administration : statistiques,
+                rapports, gestion des utilisateurs et paramètres.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits-section">
+      <div class="container">
+        <div class="row justify-content-center mb-5">
+          <div class="col-lg-8 text-center" data-aos="fade-up">
+            <h2 class="mb-4" style="font-size: 3rem; font-weight: 800">
+              Pourquoi choisir EduPilot ?
+            </h2>
+            <p class="lead">
+              Des avantages concrets pour toutes les parties prenantes
+            </p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="benefit-item">
+              <i class="fas fa-clock"></i>
+              <h4>Gain de temps considérable</h4>
+              <p>
+                Automatisation des tâches répétitives et réduction drastique de
+                la charge administrative.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="benefit-item">
+              <i class="fas fa-database"></i>
+              <h4>Centralisation des données</h4>
+              <p>
+                Toutes les informations scolaires accessibles depuis une seule
+                plateforme sécurisée.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+            <div class="benefit-item">
+              <i class="fas fa-shield-alt"></i>
+              <h4>Sécurité des données</h4>
+              <p>
+                Hébergement sécurisé, sauvegardes automatiques et conformité aux
+                normes de protection des données.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="400">
+            <div class="benefit-item">
+              <i class="fas fa-mobile-alt"></i>
+              <h4>Accessible partout</h4>
+              <p>
+                Application web et mobile pour un accès depuis n'importe quel
+                appareil, à tout moment.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Infra Salama Connection -->
+    <section class="infra-connection">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-right">
+            <span class="infra-badge">
+              <i class="fas fa-link me-2"></i>Développé par Infra Salama
+            </span>
+            <h2 class="section-title">
+              L'expertise infrastructure au service de l'éducation
+            </h2>
+            <p class="lead mb-4">
+              EduPilot n'est pas qu'un simple logiciel : c'est une solution
+              complète développée, déployée et maintenue par Infra Salama, votre
+              partenaire IT de confiance.
+            </p>
+            <div class="mb-3">
+              <i class="fas fa-check-circle me-2" style="color: #667eea"></i>
+              <strong>Infrastructure robuste</strong> : Nos experts réseau
+              garantissent une plateforme performante et sécurisée
+            </div>
+            <div class="mb-3">
+              <i class="fas fa-check-circle me-2" style="color: #667eea"></i>
+              <strong>Support technique dédié</strong> : Notre équipe vous
+              accompagne dans le déploiement et l'utilisation quotidienne
+            </div>
+            <div class="mb-3">
+              <i class="fas fa-check-circle me-2" style="color: #667eea"></i>
+              <strong>Formation incluse</strong> : Nous formons votre personnel
+              pour une prise en main optimale
+            </div>
+            <div class="mb-4">
+              <i class="fas fa-check-circle me-2" style="color: #667eea"></i>
+              <strong>Solution 100% algérienne</strong> : Développée localement
+              pour répondre aux besoins spécifiques de notre système éducatif
+            </div>
+            <a href="index.html" class="btn btn-primary btn-lg">
+              <i class="fas fa-info-circle me-2"></i>En savoir plus sur Infra
+              Salama
+            </a>
+          </div>
+
+          <div class="col-lg-6" data-aos="fade-left">
+            <div class="infra-logo-container">
+              <img
+                src="img/logoInfraSalama.png"
+                alt="Infra Salama Logo"
+                class="img-fluid"
+              />
+              <h4 class="mb-3">Infrastructure IT + Solution Logicielle</h4>
+              <p>
+                Bénéficiez de notre expertise complète : de l'installation de
+                votre réseau scolaire au déploiement d'EduPilot, nous gérons
+                tout pour vous.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="cta-edupilot" id="demo">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-10" data-aos="fade-up">
+            <h2>Prêt à transformer votre établissement ?</h2>
+            <p>
+              Demandez une démonstration gratuite et découvrez comment EduPilot
+              peut simplifier la gestion de votre école.
+            </p>
+            <div>
+              <a
+                href="contact.html?subject=demo-edupilot"
+                class="btn btn-light btn-lg"
+              >
+                <i class="fas fa-calendar-check me-2"></i>Demander une
+                démonstration
+              </a>
+              <a
+                href="#"
+                class="btn btn-outline-light btn-lg"
+                onclick="alert('Brochure bientôt disponible')"
+              >
+                <i class="fas fa-download me-2"></i>Télécharger la brochure
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer py-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 mb-4 mb-lg-0">
+            <h4 class="text-white">Infra Salama</h4>
+            <p class="text-white-50">
+              Votre partenaire de confiance pour la numérisation et la
+              modernisation des infrastructures informatiques en Algérie.
+            </p>
+            <div class="social-links">
+              <a
+                href="https://www.facebook.com/profile.php?id=61575242497657"
+                class="social-link"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a href="https://x.com/InfraSalama" class="social-link"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="#" class="social-link"
+                ><i class="fab fa-linkedin-in"></i
+              ></a>
+              <a href="#" class="social-link"
+                ><i class="fab fa-instagram"></i
+              ></a>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+            <h5 class="text-white">Solutions</h5>
+            <ul class="footer-links">
+              <li><a href="infrastructure.html">Infrastructure IT</a></li>
+              <li><a href="edupilot.html">EduPilot</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+            <h5 class="text-white">Liens rapides</h5>
+            <ul class="footer-links">
+              <li><a href="index.html">Accueil</a></li>
+              <li><a href="recrutement.html">Recrutement</a></li>
+              <li><a href="blog.html">Blog</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-4 col-md-4">
+            <h5 class="text-white">Contact</h5>
+            <ul class="footer-contact">
+              <li><i class="fas fa-map-marker-alt"></i> Oran, Algérie</li>
+              <li><i class="fas fa-phone"></i> +213 XX XX XX XX</li>
+              <li><i class="fas fa-envelope"></i> infrasalama@gmail.com</li>
+            </ul>
+          </div>
+        </div>
+        <hr class="footer-divider" />
+        <div class="row">
+          <div class="col-md-6 text-center text-md-start">
+            <p class="mb-0 text-white-50">
+              &copy; 2025 Infra Salama. Tous droits réservés.
+            </p>
+          </div>
+          <div class="col-md-6 text-center text-md-end">
+            <p class="mb-0 text-white-50">Entreprise 100% Algérienne</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" id="backToTop">
+      <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Custom JS -->
+    <script src="js/script.js"></script>
+
+    <script>
+      // Initialize AOS
+      AOS.init({
+        duration: 1000,
+        once: true,
+        offset: 100,
+      });
+    </script>
+  </body>
+</html>
