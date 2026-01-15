@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Demander une démonstration EduPilot | Infra Salama</title>
+    <meta
+      name="description"
+      content="Demandez une démonstration personnalisée d'EduPilot pour votre établissement scolaire. Découvrez toutes les fonctionnalités de notre plateforme de gestion."
+    />
+    <link rel="canonical" href="https://infrasalama.com/demo-edupilot.html" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+
+    <style>
+      /* Demo Page Specific Styles */
+      .demo-hero {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 150px 0 100px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .demo-hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+        opacity: 0.4;
+      }
+
+      .demo-hero .container {
+        position: relative;
+        z-index: 2;
+      }
+
+      .demo-hero h1 {
+        font-size: 3rem;
+        font-weight: 800;
+        color: #fff;
+        margin-bottom: 1.5rem;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .demo-hero p.lead {
+        font-size: 1.3rem;
+        color: rgba(255, 255, 255, 0.95);
+        margin-bottom: 2rem;
+        line-height: 1.7;
+      }
+
+      .demo-badge {
+        display: inline-block;
+        background: rgba(255, 255, 255, 0.2);
+        color: #fff;
+        padding: 8px 20px;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+      }
+
+      /* Process Steps */
+      .process-steps {
+        padding: 80px 0;
+        background: #f8f9fa;
+      }
+
+      .step-card {
+        background: #fff;
+        border-radius: 15px;
+        padding: 30px;
+        text-align: center;
+        height: 100%;
+        border: 2px solid transparent;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      .step-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(90deg, #667eea, #764ba2);
+        border-radius: 15px 15px 0 0;
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+      }
+
+      .step-card:hover::before {
+        transform: scaleX(1);
+      }
+
+      .step-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(102, 126, 234, 0.15);
+        border-color: rgba(102, 126, 234, 0.2);
+      }
+
+      .step-number {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        font-size: 1.8rem;
+        font-weight: 800;
+        color: #fff;
+      }
+
+      .step-card h4 {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 15px;
+      }
+
+      .step-card p {
+        color: #666;
+        line-height: 1.6;
+        margin: 0;
+      }
+
+      /* Form Section */
+      .form-section {
+        padding: 80px 0;
+        background: #fff;
+      }
+
+      .form-container {
+        background: #f8f9fa;
+        border-radius: 20px;
+        padding: 50px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+      }
+
+      .form-header {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .form-header h2 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: #333;
+        margin-bottom: 15px;
+      }
+
+      .form-header p {
+        font-size: 1.1rem;
+        color: #666;
+      }
+
+      .form-label {
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 8px;
+      }
+
+      .required-field::after {
+        content: " *";
+        color: #dc3545;
+      }
+
+      .form-control,
+      .form-select {
+        padding: 12px 15px;
+        border-radius: 10px;
+        border: 2px solid #e0e0e0;
+        transition: all 0.3s ease;
+      }
+
+      .form-control:focus,
+      .form-select:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 0 0.25rem rgba(102, 126, 234, 0.15);
+      }
+
+      .form-check-input:checked {
+        background-color: #667eea;
+        border-color: #667eea;
+      }
+
+      .btn-demo-submit {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: #fff;
+        padding: 15px 50px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        border: none;
+        border-radius: 50px;
+        transition: all 0.3s ease;
+      }
+
+      .btn-demo-submit:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        color: #fff;
+      }
+
+      /* Benefits Section */
+      .demo-benefits {
+        padding: 80px 0;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: #fff;
+      }
+
+      .benefit-item {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        padding: 25px;
+        margin-bottom: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
+      }
+
+      .benefit-item:hover {
+        background: rgba(255, 255, 255, 0.15);
+        transform: translateX(10px);
+      }
+
+      .benefit-item i {
+        font-size: 2rem;
+        margin-bottom: 10px;
+      }
+
+      .benefit-item h5 {
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+
+      /* Success Modal */
+      .success-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 9999;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .success-modal.active {
+        display: flex;
+      }
+
+      .success-content {
+        background: #fff;
+        border-radius: 20px;
+        padding: 50px;
+        max-width: 500px;
+        text-align: center;
+        animation: slideIn 0.4s ease-out;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(-50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .success-icon {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+      }
+
+      .success-icon i {
+        font-size: 40px;
+        color: #fff;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .demo-hero h1 {
+          font-size: 2.2rem;
+        }
+
+        .form-container {
+          padding: 30px 20px;
+        }
+
+        .form-header h2 {
+          font-size: 2rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <img
+            src="img/logoInfraSalama.png"
+            alt="Infra Salama Logo"
+            height="50"
+          />
+          Infra Salama
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Accueil</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle active"
+                href="#"
+                id="navbarSolutions"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Nos Solutions
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarSolutions">
+                <li>
+                  <a class="dropdown-item" href="infrastructure.html">
+                    <i class="fas fa-network-wired me-2"></i>Infrastructure IT
+                  </a>
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item active" href="edupilot.html">
+                    <i class="fas fa-graduation-cap me-2"></i>EduPilot
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="faq.html">FAQ</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="recrutement.html">Recrutement</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="blog.html">Blog / conseil</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link btn btn-primary devis-btn" href="devis.html">
+                Demander un devis
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="demo-hero">
+      <div class="container">
+        <div class="row justify-content-center text-center">
+          <div class="col-lg-10" data-aos="fade-up">
+            <span class="demo-badge">
+              <i class="fas fa-calendar-check me-2"></i>Démonstration gratuite
+            </span>
+            <h1>Demander une démonstration d'EduPilot</h1>
+            <p class="lead">
+              Découvrez comment EduPilot peut transformer la gestion de votre
+              établissement scolaire. Notre équipe vous présentera toutes les
+              fonctionnalités de la plateforme lors d'une session personnalisée.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Process Steps -->
+    <section class="process-steps">
+      <div class="container">
+        <div class="row justify-content-center mb-5">
+          <div class="col-lg-8 text-center" data-aos="fade-up">
+            <h2 class="mb-4">Comment se déroule la démonstration ?</h2>
+            <p class="lead text-muted">
+              Un processus simple et sans engagement pour découvrir EduPilot
+            </p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div
+            class="col-lg-3 col-md-6 mb-4"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="step-card">
+              <div class="step-number">1</div>
+              <h4>Demande</h4>
+              <p>
+                Remplissez le formulaire ci-dessous avec les informations de
+                votre établissement
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-lg-3 col-md-6 mb-4"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <div class="step-card">
+              <div class="step-number">2</div>
+              <h4>Prise de contact</h4>
+              <p>
+                Notre équipe vous contacte sous 48h pour planifier un
+                rendez-vous
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-lg-3 col-md-6 mb-4"
+            data-aos="fade-up"
+            data-aos-delay="300"
+          >
+            <div class="step-card">
+              <div class="step-number">3</div>
+              <h4>Démonstration</h4>
+              <p>
+                Présentation personnalisée des fonctionnalités adaptées à vos
+                besoins
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-lg-3 col-md-6 mb-4"
+            data-aos="fade-up"
+            data-aos-delay="400"
+          >
+            <div class="step-card">
+              <div class="step-number">4</div>
+              <h4>Devis</h4>
+              <p>
+                Si intéressé, nous vous proposons un devis personnalisé pour
+                votre établissement
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Demo Benefits -->
+    <section class="demo-benefits">
+      <div class="container">
+        <div class="row justify-content-center mb-5">
+          <div class="col-lg-8 text-center" data-aos="fade-up">
+            <h2 class="mb-4" style="font-size: 2.5rem; font-weight: 800">
+              Ce que vous découvrirez lors de la démo
+            </h2>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6 mb-3" data-aos="fade-up" data-aos-delay="100">
+            <div class="benefit-item">
+              <i class="fas fa-calendar-alt"></i>
+              <h5>Gestion des emplois du temps</h5>
+              <p>
+                Création automatisée, optimisation des salles et gestion des
+                ressources
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-6 mb-3" data-aos="fade-up" data-aos-delay="150">
+            <div class="benefit-item">
+              <i class="fas fa-graduation-cap"></i>
+              <h5>Système de notation</h5>
+              <p>
+                Saisie des notes, calcul des moyennes et génération automatique
+                des bulletins
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-6 mb-3" data-aos="fade-up" data-aos-delay="200">
+            <div class="benefit-item">
+              <i class="fas fa-user-check"></i>
+              <h5>Suivi des présences</h5>
+              <p>
+                Gestion digitale avec notifications instantanées aux parents
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-6 mb-3" data-aos="fade-up" data-aos-delay="250">
+            <div class="benefit-item">
+              <i class="fas fa-comments"></i>
+              <h5>Communication école-parents</h5>
+              <p>
+                Canal direct pour messages, annonces et événements scolaires
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-6 mb-3" data-aos="fade-up" data-aos-delay="300">
+            <div class="benefit-item">
+              <i class="fas fa-chart-line"></i>
+              <h5>Tableaux de bord</h5>
+              <p>
+                Statistiques en temps réel pour la direction et les professeurs
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-6 mb-3" data-aos="fade-up" data-aos-delay="350">
+            <div class="benefit-item">
+              <i class="fas fa-mobile-alt"></i>
+              <h5>Application mobile</h5>
+              <p>
+                Accès depuis smartphone et tablette pour tous les utilisateurs
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Form Section -->
+    <section class="form-section">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-10">
+            <div class="form-container" data-aos="fade-up">
+              <div class="form-header">
+                <h2>Formulaire de demande de démonstration</h2>
+                <p>
+                  Remplissez ce formulaire et notre équipe vous contactera pour
+                  planifier votre démonstration personnalisée
+                </p>
+              </div>
+
+              <form id="demoForm" method="POST" action="api/demo.php">
+                <!-- Informations Établissement -->
+                <div class="card mb-4">
+                  <div class="card-header bg-white border-0 pt-4 pb-3">
+                    <h5 class="mb-0">
+                      <i class="fas fa-school me-2" style="color: #667eea"></i>
+                      Informations sur l'établissement
+                    </h5>
+                  </div>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-6 mb-3">
+                        <label
+                          for="nomEtablissement"
+                          class="form-label required-field"
+                        >
+                          Nom de l'établissement
+                        </label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="nomEtablissement"
+                          name="nomEtablissement"
+                          placeholder="École Primaire..."
+                          required
+                        />
+                      </div>
+
+                      <div class="col-md-6 mb-3">
+                        <label
+                          for="typeEtablissement"
+                          class="form-label required-field"
+                        >
+                          Type d'établissement
+                        </label>
+                        <select
+                          class="form-select"
+                          id="typeEtablissement"
+                          name="typeEtablissement"
+                          required
+                        >
+                          <option value="" selected disabled>
+                            Sélectionnez...
+                          </option>
+                          <option value="public-primaire">
+                            École Primaire Publique
+                          </option>
+                          <option value="prive-primaire">
+                            École Primaire Privée
+                          </option>
+                          <option value="public-college">
+                            Collège Public (CEM)
+                          </option>
+                          <option value="prive-college">Collège Privé</option>
+                          <option value="public-lycee">Lycée Public</option>
+                          <option value="prive-lycee">Lycée Privé</option>
+                          <option value="universite">
+                            Université / Institut
+                          </option>
+                          <option value="centre-formation">
+                            Centre de Formation
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-6 mb-3">
+                        <label for="ville" class="form-label required-field">
+                          Ville
+                        </label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="ville"
+                          name="ville"
+                          placeholder="Alger, Oran..."
+                          required
+                        />
+                      </div>
+
+                      <div class="col-md-6 mb-3">
+                        <label for="wilaya" class="form-label required-field">
+                          Wilaya
+                        </label>
+                        <select
+                          class="form-select"
+                          id="wilaya"
+                          name="wilaya"
+                          required
+                        >
+                          <option value="" selected disabled>
+                            Sélectionnez...
+                          </option>
+                          <option value="01">01 - Adrar</option>
+                          <option value="02">02 - Chlef</option>
+                          <option value="03">03 - Laghouat</option>
+                          <option value="04">04 - Oum El Bouaghi</option>
+                          <option value="05">05 - Batna</option>
+                          <option value="06">06 - Béjaïa</option>
+                          <option value="07">07 - Biskra</option>
+                          <option value="08">08 - Béchar</option>
+                          <option value="09">09 - Blida</option>
+                          <option value="10">10 - Bouira</option>
+                          <option value="11">11 - Tamanrasset</option>
+                          <option value="12">12 - Tébessa</option>
+                          <option value="13">13 - Tlemcen</option>
+                          <option value="14">14 - Tiaret</option>
+                          <option value="15">15 - Tizi Ouzou</option>
+                          <option value="16">16 - Alger</option>
+                          <option value="17">17 - Djelfa</option>
+                          <option value="18">18 - Jijel</option>
+                          <option value="19">19 - Sétif</option>
+                          <option value="20">20 - Saïda</option>
+                          <option value="21">21 - Skikda</option>
+                          <option value="22">22 - Sidi Bel Abbès</option>
+                          <option value="23">23 - Annaba</option>
+                          <option value="24">24 - Guelma</option>
+                          <option value="25">25 - Constantine</option>
+                          <option value="26">26 - Médéa</option>
+                          <option value="27">27 - Mostaganem</option>
+                          <option value="28">28 - M'Sila</option>
+                          <option value="29">29 - Mascara</option>
+                          <option value="30">30 - Ouargla</option>
+                          <option value="31">31 - Oran</option>
+                          <option value="32">32 - El Bayadh</option>
+                          <option value="33">33 - Illizi</option>
+                          <option value="34">34 - Bordj Bou Arréridj</option>
+                          <option value="35">35 - Boumerdès</option>
+                          <option value="36">36 - El Tarf</option>
+                          <option value="37">37 - Tindouf</option>
+                          <option value="38">38 - Tissemsilt</option>
+                          <option value="39">39 - El Oued</option>
+                          <option value="40">40 - Khenchela</option>
+                          <option value="41">41 - Souk Ahras</option>
+                          <option value="42">42 - Tipaza</option>
+                          <option value="43">43 - Mila</option>
+                          <option value="44">44 - Aïn Defla</option>
+                          <option value="45">45 - Naâma</option>
+                          <option value="46">46 - Aïn Témouchent</option>
+                          <option value="47">47 - Ghardaïa</option>
+                          <option value="48">48 - Relizane</option>
+                          <option value="49">49 - Timimoun</option>
+                          <option value="50">50 - Bordj Badji Mokhtar</option>
+                          <option value="51">51 - Ouled Djellal</option>
+                          <option value="52">52 - Béni Abbès</option>
+                          <option value="53">53 - In Salah</option>
+                          <option value="54">54 - In Guezzam</option>
+                          <option value="55">55 - Touggourt</option>
+                          <option value="56">56 - Djanet</option>
+                          <option value="57">57 - El M'Ghair</option>
+                          <option value="58">58 - El Meniaa</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="mb-3">
+                      <label
+                        for="nombreEleves"
+                        class="form-label required-field"
+                      >
+                        Nombre approximatif d'élèves
+                      </label>
+                      <select
+                        class="form-select"
+                        id="nombreEleves"
+                        name="nombreEleves"
+                        required
+                      >
+                        <option value="" selected disabled>
+                          Sélectionnez...
+                        </option>
+                        <option value="moins-100">Moins de 100 élèves</option>
+                        <option value="100-300">100 à 300 élèves</option>
+                        <option value="300-500">300 à 500 élèves</option>
+                        <option value="500-1000">500 à 1000 élèves</option>
+                        <option value="1000-2000">1000 à 2000 élèves</option>
+                        <option value="plus-2000">Plus de 2000 élèves</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Informations Contact -->
+                <div class="card mb-4">
+                  <div class="card-header bg-white border-0 pt-4 pb-3">
+                    <h5 class="mb-0">
+                      <i class="fas fa-user me-2" style="color: #667eea"></i>
+                      Votre contact
+                    </h5>
+                  </div>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-6 mb-3">
+                        <label
+                          for="nomContact"
+                          class="form-label required-field"
+                        >
+                          Nom complet
+                        </label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="nomContact"
+                          name="nomContact"
+                          placeholder="Nom et prénom"
+                          required
+                        />
+                      </div>
+
+                      <div class="col-md-6 mb-3">
+                        <label for="fonction" class="form-label required-field">
+                          Fonction
+                        </label>
+                        <select
+                          class="form-select"
+                          id="fonction"
+                          name="fonction"
+                          required
+                        >
+                          <option value="" selected disabled>
+                            Sélectionnez...
+                          </option>
+                          <option value="directeur">
+                            Directeur / Directrice
+                          </option>
+                          <option value="adjoint">Directeur Adjoint</option>
+                          <option value="censeur">Censeur</option>
+                          <option value="responsable-admin">
+                            Responsable Administratif
+                          </option>
+                          <option value="responsable-it">Responsable IT</option>
+                          <option value="secretaire">Secrétaire Général</option>
+                          <option value="autre">Autre</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-6 mb-3">
+                        <label for="email" class="form-label required-field">
+                          Email professionnel
+                        </label>
+                        <input
+                          type="email"
+                          class="form-control"
+                          id="email"
+                          name="email"
+                          placeholder="exemple@etablissement.dz"
+                          required
+                        />
+                      </div>
+
+                      <div class="col-md-6 mb-3">
+                        <label
+                          for="telephone"
+                          class="form-label required-field"
+                        >
+                          Téléphone
+                        </label>
+                        <input
+                          type="tel"
+                          class="form-control"
+                          id="telephone"
+                          name="telephone"
+                          placeholder="+213 X XX XX XX XX"
+                          required
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Message & Préférences -->
+                <div class="card mb-4">
+                  <div class="card-header bg-white border-0 pt-4 pb-3">
+                    <h5 class="mb-0">
+                      <i class="fas fa-message me-2" style="color: #667eea"></i>
+                      Informations complémentaires
+                    </h5>
+                  </div>
+                  <div class="card-body">
+                    <div class="mb-3">
+                      <label for="message" class="form-label">
+                        Message (optionnel)
+                      </label>
+                      <textarea
+                        class="form-control"
+                        id="message"
+                        name="message"
+                        rows="4"
+                        placeholder="Dites-nous en plus sur vos besoins, vos attentes, ou vos questions..."
+                      ></textarea>
+                    </div>
+
+                    <div class="form-check mb-3">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="acceptDemo"
+                        name="acceptDemo"
+                        required
+                      />
+                      <label class="form-check-label" for="acceptDemo">
+                        <strong
+                          >Je souhaite une démonstration d'EduPilot</strong
+                        >
+                        et accepte d'être contacté par l'équipe Infra Salama
+                      </label>
+                    </div>
+
+                    <div class="form-check mb-3">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="rgpd"
+                        name="rgpd"
+                        required
+                      />
+                      <label class="form-check-label" for="rgpd">
+                        J'accepte que mes données soient traitées conformément à
+                        la politique de confidentialité d'Infra Salama *
+                      </label>
+                    </div>
+
+                    <div class="alert alert-info mb-0">
+                      <i class="fas fa-info-circle me-2"></i>
+                      <strong>Note :</strong> Cette demande ne crée aucun compte
+                      et n'engage aucune obligation d'achat. Un devis vous sera
+                      proposé uniquement après la démonstration et selon vos
+                      besoins.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="text-center">
+                  <button type="submit" class="btn btn-demo-submit">
+                    <i class="fas fa-paper-plane me-2"></i>
+                    Envoyer ma demande de démonstration
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Success Modal -->
+    <div class="success-modal" id="successModal">
+      <div class="success-content">
+        <div class="success-icon">
+          <i class="fas fa-check"></i>
+        </div>
+        <h3 class="mb-3">Demande envoyée avec succès !</h3>
+        <p class="mb-4">
+          Merci pour votre demande de démonstration. Notre équipe vous
+          contactera sous 48 heures pour planifier un rendez-vous.
+        </p>
+        <button class="btn btn-demo-submit" onclick="closeModal()">
+          Fermer
+        </button>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer py-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 mb-4 mb-lg-0">
+            <h4 class="text-white">Infra Salama</h4>
+            <p class="text-white-50">
+              Votre partenaire de confiance pour la numérisation et la
+              modernisation des infrastructures informatiques en Algérie.
+            </p>
+            <div class="social-links">
+              <a
+                href="https://www.facebook.com/profile.php?id=61575242497657"
+                class="social-link"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a href="https://x.com/InfraSalama" class="social-link"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="#" class="social-link"
+                ><i class="fab fa-linkedin-in"></i
+              ></a>
+              <a href="#" class="social-link"
+                ><i class="fab fa-instagram"></i
+              ></a>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+            <h5 class="text-white">Solutions</h5>
+            <ul class="footer-links">
+              <li><a href="infrastructure.html">Infrastructure IT</a></li>
+              <li><a href="edupilot.html">EduPilot</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+            <h5 class="text-white">Liens rapides</h5>
+            <ul class="footer-links">
+              <li><a href="index.html">Accueil</a></li>
+              <li><a href="recrutement.html">Recrutement</a></li>
+              <li><a href="blog.html">Blog</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-4 col-md-4">
+            <h5 class="text-white">Contact</h5>
+            <ul class="footer-contact">
+              <li><i class="fas fa-map-marker-alt"></i> Oran, Algérie</li>
+              <li><i class="fas fa-phone"></i> +213 XX XX XX XX</li>
+              <li><i class="fas fa-envelope"></i> infrasalama@gmail.com</li>
+            </ul>
+          </div>
+        </div>
+        <hr class="footer-divider" />
+        <div class="row">
+          <div class="col-md-6 text-center text-md-start">
+            <p class="mb-0 text-white-50">
+              &copy; 2025 Infra Salama. Tous droits réservés.
+            </p>
+          </div>
+          <div class="col-md-6 text-center text-md-end">
+            <p class="mb-0 text-white-50">Entreprise 100% Algérienne</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" id="backToTop">
+      <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Custom JS -->
+    <script src="js/script.js"></script>
+
+    <script>
+      // Initialize AOS
+      AOS.init({
+        duration: 1000,
+        once: true,
+        offset: 100,
+      });
+
+      // Form Submission Handler
+      document
+        .getElementById("demoForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          // Simuler l'envoi (à remplacer par votre logique backend)
+          // Dans un vrai cas, vous utiliseriez AJAX ou fetch pour envoyer les données
+
+          // Afficher la modale de succès
+          document.getElementById("successModal").classList.add("active");
+
+          // Réinitialiser le formulaire
+          this.reset();
+
+          // En production, décommentez pour envoyer vraiment :
+          // this.submit();
+        });
+
+      function closeModal() {
+        document.getElementById("successModal").classList.remove("active");
+        // Optionnel : rediriger vers la page EduPilot
+        // window.location.href = 'edupilot.html';
+      }
+
+      // Fermer la modale en cliquant en dehors
+      document
+        .getElementById("successModal")
+        .addEventListener("click", function (e) {
+          if (e.target === this) {
+            closeModal();
+          }
+        });
+    </script>
+  </body>
+</html>
