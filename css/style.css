@@ -20,6 +20,10 @@
   --transition: all 0.3s ease;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body {
   font-family: "Roboto", sans-serif;
   color: var(--text-color);
@@ -755,6 +759,13 @@ a:hover {
 }
 
 /* ===== RESPONSIVE STYLES ===== */
+@media (max-width: 991.98px) {
+  [data-aos="fade-left"]:not(.aos-animate),
+  [data-aos="fade-right"]:not(.aos-animate) {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
 @media (max-width: 991.98px) {
   .navbar {
     padding: 0.5rem 0;
