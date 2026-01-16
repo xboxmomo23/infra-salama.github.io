@@ -1,0 +1,8 @@
+# Ignorer tous les fichiers uploadés
+*
+
+# Sauf ce fichier .gitignore
+!.gitignore
+
+# Et les fichiers .htaccess de sécurité
+!cv/.htaccess

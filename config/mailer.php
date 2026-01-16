@@ -116,6 +116,34 @@ class MailerService
         }
     }
 
+    /**
+     * Envoie un email de candidature (recrutement)
+     */
+    public function sendRecruitmentForm($data)
+    {
+        try {
+            $this->mailer->clearAddresses();
+            $this->mailer->clearAttachments();
+            $this->mailer->addAddress(env('MAIL_TO_ADDRESS'));
+
+            // Attacher le CV
+            if (isset($data['cvFilePath']) && file_exists($data['cvFilePath'])) {
+                $this->mailer->addAttachment($data['cvFilePath'], $data['cvFileName']);
+            }
+
+            $this->mailer->isHTML(true);
+            $this->mailer->Subject = 'Nouvelle candidature - ' . ($data['position'] ?? 'N/A') . ' - ' . ($data['firstName'] ?? '') . ' ' . ($data['lastName'] ?? '');
+
+            $this->mailer->Body = $this->getRecruitmentEmailTemplate($data);
+            $this->mailer->AltBody = $this->getRecruitmentEmailPlainText($data);
+
+            return $this->mailer->send();
+        } catch (Exception $e) {
+            error_log("Erreur envoi email recrutement: " . $e->getMessage());
+            return false;
+        }
+    }
+
     // Templates HTML pour chaque type d'email
 
     private function getContactEmailTemplate($data)
@@ -371,5 +399,89 @@ class MailerService
             "Email: " . ($data['email'] ?? 'N/A') . "\n" .
             "Téléphone: " . ($data['telephone'] ?? 'N/A') . "\n\n" .
             (isset($data['message']) && !empty($data['message']) ? "=== MESSAGE ===\n" . $data['message'] : "");
+    }
+
+    private function getRecruitmentEmailTemplate($data)
+    {
+        return "
+        <html>
+        <head>
+            <style>
+                body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+                .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+                .header { background: linear-gradient(135deg, #0056b3 0%, #003d82 100%); color: white; padding: 20px; text-align: center; }
+                .section { background: #f8f9fa; padding: 20px; margin-bottom: 20px; border-radius: 5px; }
+                .field { margin-bottom: 15px; }
+                .label { font-weight: bold; color: #0056b3; }
+                .value { margin-top: 5px; }
+                h3 { color: #0056b3; margin-top: 0; }
+                .badge { display: inline-block; background: #0056b3; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.9rem; }
+            </style>
+        </head>
+        <body>
+            <div class='container'>
+                <div class='header'>
+                    <h2>📄 Nouvelle Candidature</h2>
+                    <span class='badge'>" . htmlspecialchars($data['position'] ?? 'N/A') . "</span>
+                </div>
+                
+                <div class='section'>
+                    <h3>👤 Informations du candidat</h3>
+                    <div class='field'>
+                        <div class='label'>Nom complet:</div>
+                        <div class='value'>" . htmlspecialchars($data['firstName'] ?? '') . " " . htmlspecialchars($data['lastName'] ?? '') . "</div>
+                    </div>
+                    <div class='field'>
+                        <div class='label'>Email:</div>
+                        <div class='value'>" . htmlspecialchars($data['email'] ?? 'N/A') . "</div>
+                    </div>
+                    <div class='field'>
+                        <div class='label'>Téléphone:</div>
+                        <div class='value'>" . htmlspecialchars($data['phone'] ?? 'N/A') . "</div>
+                    </div>
+                </div>
+
+                <div class='section'>
+                    <h3>💼 Informations professionnelles</h3>
+                    <div class='field'>
+                        <div class='label'>Poste souhaité:</div>
+                        <div class='value'>" . htmlspecialchars($data['position'] ?? 'N/A') . "</div>
+                    </div>
+                    <div class='field'>
+                        <div class='label'>Années d'expérience:</div>
+                        <div class='value'>" . htmlspecialchars($data['experience'] ?? 'N/A') . "</div>
+                    </div>
+                </div>
+
+                " . (isset($data['coverLetter']) && !empty($data['coverLetter']) ? "
+                <div class='section'>
+                    <h3>✉️ Lettre de motivation</h3>
+                    <div class='value'>" . nl2br(htmlspecialchars($data['coverLetter'])) . "</div>
+                </div>" : "") . "
+
+                <div class='section'>
+                    <h3>📎 Pièce jointe</h3>
+                    <div class='value'>
+                        <strong>CV:</strong> " . htmlspecialchars($data['cvFileName'] ?? 'N/A') . " (voir pièce jointe)
+                    </div>
+                </div>
+            </div>
+        </body>
+        </html>";
+    }
+
+    private function getRecruitmentEmailPlainText($data)
+    {
+        return "NOUVELLE CANDIDATURE\n\n" .
+            "=== CANDIDAT ===\n" .
+            "Nom: " . ($data['firstName'] ?? '') . ' ' . ($data['lastName'] ?? '') . "\n" .
+            "Email: " . ($data['email'] ?? 'N/A') . "\n" .
+            "Téléphone: " . ($data['phone'] ?? 'N/A') . "\n\n" .
+            "=== PROFIL ===\n" .
+            "Poste souhaité: " . ($data['position'] ?? 'N/A') . "\n" .
+            "Expérience: " . ($data['experience'] ?? 'N/A') . "\n\n" .
+            (isset($data['coverLetter']) && !empty($data['coverLetter']) ? "=== LETTRE DE MOTIVATION ===\n" . $data['coverLetter'] . "\n\n" : "") .
+            "=== CV ===\n" .
+            "Fichier: " . ($data['cvFileName'] ?? 'N/A') . " (voir pièce jointe)";
     }
 }

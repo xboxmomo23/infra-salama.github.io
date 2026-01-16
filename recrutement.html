@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
@@ -61,10 +61,8 @@
     <style>
       /* Styles spécifiques à la page recrutement */
       .recruitment-banner {
-        background: linear-gradient(
-            rgba(0, 86, 179, 0.85),
-            rgba(0, 86, 179, 0.95)
-          ),
+        background:
+          linear-gradient(rgba(0, 86, 179, 0.85), rgba(0, 86, 179, 0.95)),
           url("/placeholder.svg?height=800&width=1200");
         background-size: cover;
         background-position: center;
@@ -213,10 +211,8 @@
       }
 
       .recruitment-stats {
-        background: linear-gradient(
-            rgba(0, 86, 179, 0.9),
-            rgba(0, 86, 179, 0.95)
-          ),
+        background:
+          linear-gradient(rgba(0, 86, 179, 0.9), rgba(0, 86, 179, 0.95)),
           url("/placeholder.svg?height=800&width=1200");
         background-size: cover;
         background-position: center;
@@ -363,10 +359,8 @@
       }
 
       .cta-recruitment {
-        background: linear-gradient(
-            rgba(0, 86, 179, 0.9),
-            rgba(0, 86, 179, 0.95)
-          ),
+        background:
+          linear-gradient(rgba(0, 86, 179, 0.9), rgba(0, 86, 179, 0.95)),
           url("/placeholder.svg?height=800&width=1200");
         background-size: cover;
         background-position: center;
@@ -1227,7 +1221,7 @@
                 id="recruitmentForm"
                 class="recruitment-form"
                 method="POST"
-                action="config/process_application.php"
+                action="api/recrutement.php"
                 enctype="multipart/form-data"
               >
                 <div class="row">
@@ -1485,5 +1479,75 @@
     <script src="js/script.js"></script>
 
     <script src="js/form_validation.js"></script>
+
+    <script>
+      document
+        .getElementById("recruitmentForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const formData = new FormData(this);
+          const submitBtn = this.querySelector('button[type="submit"]');
+          const originalText = submitBtn.innerHTML;
+
+          // Vérifier que le CV est bien sélectionné
+          const cvFile = document.getElementById("resume").files[0];
+          if (!cvFile) {
+            alert("❌ Veuillez sélectionner votre CV");
+            return;
+          }
+
+          // Vérifier la taille (5MB max)
+          if (cvFile.size > 5 * 1024 * 1024) {
+            alert("❌ Le CV ne doit pas dépasser 5MB");
+            return;
+          }
+
+          submitBtn.disabled = true;
+          submitBtn.innerHTML =
+            '<i class="fas fa-spinner fa-spin me-2"></i>Envoi en cours...';
+
+          try {
+            const response = await fetch("api/recrutement.php", {
+              method: "POST",
+              body: formData,
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+              alert("✅ " + result.message);
+              this.reset();
+              // Scroll vers le haut
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            } else {
+              if (result.errors) {
+                alert("❌ Erreurs:\n" + result.errors.join("\n"));
+              } else {
+                alert("❌ " + (result.message || "Erreur d'envoi"));
+              }
+            }
+          } catch (error) {
+            console.error("Erreur:", error);
+            alert("❌ Erreur de connexion au serveur");
+          } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
+          }
+        });
+
+      // Afficher le nom du fichier sélectionné
+      document
+        .getElementById("resume")
+        .addEventListener("change", function (e) {
+          const fileName = e.target.files[0]?.name;
+          if (fileName) {
+            const fileSize = (e.target.files[0].size / (1024 * 1024)).toFixed(
+              2,
+            );
+            console.log(`Fichier sélectionné: ${fileName} (${fileSize} MB)`);
+          }
+        });
+    </script>
   </body>
 </html>

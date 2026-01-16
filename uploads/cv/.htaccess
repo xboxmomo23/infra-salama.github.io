@@ -1,0 +1,8 @@
+# Bloquer l'accès direct aux CV
+Order Deny,Allow
+Deny from all
+
+# Autoriser uniquement les scripts PHP à accéder
+<FilesMatch "\.(php)$">
+    Allow from all
+</FilesMatch>
