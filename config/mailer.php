@@ -13,10 +13,13 @@ require_once __DIR__ . '/env.php';
 class MailerService
 {
     private $mailer;
+    private $logFile;
 
     public function __construct()
     {
         $this->mailer = new PHPMailer(true);
+        $this->logFile = __DIR__ . '/../logs/mailer.log';
+        $this->ensureLogPath();
         $this->configure();
     }
 
@@ -26,26 +29,39 @@ class MailerService
     private function configure()
     {
         try {
-            // Configuration serveur
+            $host = env('SMTP_HOST', env('MAIL_HOST', 'smtp.gmail.com'));
+            $port = (int) env('SMTP_PORT', env('MAIL_PORT', 587));
+            $secure = strtolower((string) env('SMTP_SECURE', env('MAIL_ENCRYPTION', 'tls')));
+            $username = env('SMTP_USER', env('MAIL_USERNAME'));
+            $password = env('SMTP_PASS', env('MAIL_PASSWORD'));
+            $from = env('MAIL_FROM', env('MAIL_FROM_ADDRESS', $username));
+            $fromName = env('MAIL_FROM_NAME', 'Infra Salama');
+
             $this->mailer->isSMTP();
-            $this->mailer->Host       = env('MAIL_HOST', 'smtp.gmail.com');
-            $this->mailer->SMTPAuth   = true;
-            $this->mailer->Username   = env('MAIL_USERNAME');
-            $this->mailer->Password   = env('MAIL_PASSWORD');
-            $this->mailer->SMTPSecure = env('MAIL_ENCRYPTION', PHPMailer::ENCRYPTION_STARTTLS);
-            $this->mailer->Port       = env('MAIL_PORT', 587);
-            $this->mailer->CharSet    = 'UTF-8';
+            $this->mailer->Host = $host;
+            $this->mailer->Port = $port;
+            $this->mailer->SMTPAuth = !empty($username);
+            $this->mailer->Username = $username;
+            $this->mailer->Password = $password;
+            $this->mailer->SMTPSecure = $secure === 'ssl'
+                ? PHPMailer::ENCRYPTION_SMTPS
+                : PHPMailer::ENCRYPTION_STARTTLS;
+            $this->mailer->CharSet = 'UTF-8';
+            $this->mailer->isHTML(true);
 
-            // Expéditeur par défaut
-            $this->mailer->setFrom(
-                env('MAIL_FROM_ADDRESS'),
-                env('MAIL_FROM_NAME', 'Infra Salama')
-            );
+            if ($from) {
+                $this->mailer->setFrom($from, $fromName);
+            }
 
-            // Mode debug (désactivé en production)
+            // Mode debug (redirigé vers error_log en local uniquement)
             $this->mailer->SMTPDebug = env('APP_ENV') === 'local' ? 2 : 0;
+            if ($this->mailer->SMTPDebug > 0) {
+                $this->mailer->Debugoutput = 'error_log';
+            }
         } catch (Exception $e) {
-            error_log("Erreur configuration mailer: " . $e->getMessage());
+            $this->log('configuration', 'error', [
+                'error' => $e->getMessage(),
+            ]);
             throw $e;
         }
     }
@@ -56,18 +72,17 @@ class MailerService
     public function sendContactForm($data)
     {
         try {
-            $this->mailer->clearAddresses();
-            $this->mailer->addAddress(env('MAIL_TO_ADDRESS'));
-
-            $this->mailer->isHTML(true);
+            $this->setRecipients(env('CONTACT_TO', env('MAIL_TO_ADDRESS')));
             $this->mailer->Subject = 'Nouveau message depuis le formulaire de contact';
 
             $this->mailer->Body = $this->getContactEmailTemplate($data);
             $this->mailer->AltBody = $this->getContactEmailPlainText($data);
 
-            return $this->mailer->send();
+            $sent = $this->mailer->send();
+            $this->log('contact', $sent ? 'success' : 'error');
+            return $sent;
         } catch (Exception $e) {
-            error_log("Erreur envoi email contact: " . $e->getMessage());
+            $this->log('contact', 'error', ['error' => $e->getMessage(), 'mail_error' => $this->mailer->ErrorInfo]);
             return false;
         }
     }
@@ -78,18 +93,17 @@ class MailerService
     public function sendDevisForm($data)
     {
         try {
-            $this->mailer->clearAddresses();
-            $this->mailer->addAddress(env('MAIL_TO_ADDRESS'));
-
-            $this->mailer->isHTML(true);
+            $this->setRecipients(env('QUOTE_TO', env('MAIL_TO_ADDRESS')));
             $this->mailer->Subject = 'Nouvelle demande de devis - ' . ($data['establishmentName'] ?? 'N/A');
 
             $this->mailer->Body = $this->getDevisEmailTemplate($data);
             $this->mailer->AltBody = $this->getDevisEmailPlainText($data);
 
-            return $this->mailer->send();
+            $sent = $this->mailer->send();
+            $this->log('devis', $sent ? 'success' : 'error');
+            return $sent;
         } catch (Exception $e) {
-            error_log("Erreur envoi email devis: " . $e->getMessage());
+            $this->log('devis', 'error', ['error' => $e->getMessage(), 'mail_error' => $this->mailer->ErrorInfo]);
             return false;
         }
     }
@@ -100,18 +114,17 @@ class MailerService
     public function sendDemoForm($data)
     {
         try {
-            $this->mailer->clearAddresses();
-            $this->mailer->addAddress(env('MAIL_TO_ADDRESS'));
-
-            $this->mailer->isHTML(true);
+            $this->setRecipients(env('DEMO_TO', env('MAIL_TO_ADDRESS')));
             $this->mailer->Subject = 'Demande de démo EduPilot - ' . ($data['nomEtablissement'] ?? 'N/A');
 
             $this->mailer->Body = $this->getDemoEmailTemplate($data);
             $this->mailer->AltBody = $this->getDemoEmailPlainText($data);
 
-            return $this->mailer->send();
+            $sent = $this->mailer->send();
+            $this->log('demo', $sent ? 'success' : 'error');
+            return $sent;
         } catch (Exception $e) {
-            error_log("Erreur envoi email démo: " . $e->getMessage());
+            $this->log('demo', 'error', ['error' => $e->getMessage(), 'mail_error' => $this->mailer->ErrorInfo]);
             return false;
         }
     }
@@ -122,26 +135,87 @@ class MailerService
     public function sendRecruitmentForm($data)
     {
         try {
-            $this->mailer->clearAddresses();
+            $this->setRecipients(env('RECRUIT_TO', env('MAIL_TO_ADDRESS')));
             $this->mailer->clearAttachments();
-            $this->mailer->addAddress(env('MAIL_TO_ADDRESS'));
 
             // Attacher le CV
             if (isset($data['cvFilePath']) && file_exists($data['cvFilePath'])) {
                 $this->mailer->addAttachment($data['cvFilePath'], $data['cvFileName']);
             }
 
-            $this->mailer->isHTML(true);
             $this->mailer->Subject = 'Nouvelle candidature - ' . ($data['position'] ?? 'N/A') . ' - ' . ($data['firstName'] ?? '') . ' ' . ($data['lastName'] ?? '');
 
             $this->mailer->Body = $this->getRecruitmentEmailTemplate($data);
             $this->mailer->AltBody = $this->getRecruitmentEmailPlainText($data);
 
-            return $this->mailer->send();
+            $sent = $this->mailer->send();
+            $this->log('recrutement', $sent ? 'success' : 'error');
+            return $sent;
         } catch (Exception $e) {
-            error_log("Erreur envoi email recrutement: " . $e->getMessage());
+            $this->log('recrutement', 'error', ['error' => $e->getMessage(), 'mail_error' => $this->mailer->ErrorInfo]);
             return false;
         }
+    }
+
+    public function sendHealthCheck($recipient = null)
+    {
+        $to = $recipient ?: env('CONTACT_TO', env('MAIL_TO_ADDRESS'));
+        try {
+            $this->setRecipients($to);
+            $this->mailer->Subject = 'Health check email - Infra Salama';
+            $this->mailer->Body = '<p>Test d\'envoi SMTP depuis api/health-mail.php</p>';
+            $this->mailer->AltBody = 'Test d\'envoi SMTP depuis api/health-mail.php';
+
+            $sent = $this->mailer->send();
+            $this->log('health-mail', $sent ? 'success' : 'error');
+            return $sent;
+        } catch (Exception $e) {
+            $this->log('health-mail', 'error', ['error' => $e->getMessage(), 'mail_error' => $this->mailer->ErrorInfo]);
+            return false;
+        }
+    }
+
+    private function setRecipients($addressList)
+    {
+        $this->mailer->clearAddresses();
+        $addresses = array_filter(array_map('trim', explode(',', (string) $addressList)));
+        foreach ($addresses as $address) {
+            $this->mailer->addAddress($address);
+        }
+    }
+
+    private function ensureLogPath()
+    {
+        $dir = dirname($this->logFile);
+        if (!is_dir($dir)) {
+            mkdir($dir, 0755, true);
+        }
+    }
+
+    private function log($endpoint, $status, array $context = [])
+    {
+        $toAddresses = array_map(function ($address) {
+            return $address[0] ?? '';
+        }, $this->mailer->getToAddresses());
+
+        $line = sprintf(
+            "[%s] endpoint=%s status=%s to=%s from=%s host=%s user=%s error=%s%s",
+            date('Y-m-d H:i:s'),
+            $endpoint,
+            $status,
+            implode(',', array_filter($toAddresses)),
+            $this->mailer->From,
+            $this->mailer->Host,
+            $this->mailer->Username,
+            $context['error'] ?? '-',
+            PHP_EOL
+        );
+
+        if (isset($context['mail_error']) && $context['mail_error']) {
+            $line = rtrim($line, PHP_EOL) . ' mail_error=' . $context['mail_error'] . PHP_EOL;
+        }
+
+        file_put_contents($this->logFile, $line, FILE_APPEND);
     }
 
     // Templates HTML pour chaque type d'email
@@ -332,7 +406,7 @@ class MailerService
         <body>
             <div class='container'>
                 <div class='header'>
-                    <h2>Demande de démonstration EduPilot</h2>
+                    <h2>Demande de démo EduPilot</h2>
                 </div>
                 
                 <div class='section'>
@@ -421,7 +495,7 @@ class MailerService
         <body>
             <div class='container'>
                 <div class='header'>
-                    <h2>📄 Nouvelle Candidature</h2>
+                    <h2>🔥 Nouvelle Candidature</h2>
                     <span class='badge'>" . htmlspecialchars($data['position'] ?? 'N/A') . "</span>
                 </div>
                 
@@ -455,7 +529,7 @@ class MailerService
 
                 " . (isset($data['coverLetter']) && !empty($data['coverLetter']) ? "
                 <div class='section'>
-                    <h3>✉️ Lettre de motivation</h3>
+                    <h3>📝 Lettre de motivation</h3>
                     <div class='value'>" . nl2br(htmlspecialchars($data['coverLetter'])) . "</div>
                 </div>" : "") . "
 

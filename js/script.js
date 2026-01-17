@@ -50,69 +50,92 @@ document.addEventListener('DOMContentLoaded', function() {
     // Form Validation and Submission
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+        contactForm.addEventListener('submit', async function(e) {
             e.preventDefault();
-            
-            // Basic form validation
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const subject = document.getElementById('subject').value;
-            const message = document.getElementById('message').value;
-            
-            if (!name || !email || !subject || !message) {
-                alert('Veuillez remplir tous les champs obligatoires.');
-                return;
+
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
+            const privacyCheckbox = contactForm.querySelector('input[name="privacy"]');
+            const formData = new FormData(contactForm);
+
+            if (privacyCheckbox) {
+                formData.set('privacy', privacyCheckbox.checked ? 'on' : '');
             }
-            
-            // Email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                alert('Veuillez entrer une adresse email valide.');
-                return;
+
+            try {
+                if (submitBtn) {
+                    submitBtn.disabled = true;
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Envoi...';
+                }
+
+                const endpoint = contactForm.getAttribute('action') || 'api/contact.php';
+                const response = await fetch(endpoint, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+                if (response.ok && result.success) {
+                    alert(result.message || 'Votre message a été envoyé avec succès.');
+                    contactForm.reset();
+                } else {
+                    const message = result.errors ? result.errors.join('\n') : (result.message || 'Erreur lors de l\'envoi');
+                    alert(message);
+                }
+            } catch (error) {
+                console.error('Erreur contact:', error);
+                alert('Erreur de connexion au serveur');
+            } finally {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = 'Envoyer le message';
+                }
             }
-            
-            // Simulate form submission
-            alert('Votre message a été envoyé avec succès. Nous vous contacterons bientôt.');
-            contactForm.reset();
         });
     }
 
     // Quote Form Validation and Submission
     const quoteForm = document.getElementById('quoteForm');
     if (quoteForm) {
-        quoteForm.addEventListener('submit', function(e) {
+        quoteForm.addEventListener('submit', async function(e) {
             e.preventDefault();
-            
-            // Basic form validation
-            const firstName = document.getElementById('firstName').value;
-            const lastName = document.getElementById('lastName').value;
-            const email = document.getElementById('email').value;
-            const phone = document.getElementById('phone').value;
-            const establishmentName = document.getElementById('establishmentName').value;
-            const establishmentType = document.getElementById('establishmentType').value;
-            
-            if (!firstName || !lastName || !email || !phone || !establishmentName || !establishmentType) {
-                alert('Veuillez remplir tous les champs obligatoires.');
-                return;
+
+            const submitBtn = quoteForm.querySelector('button[type="submit"]');
+            const privacyCheckbox = quoteForm.querySelector('input[name="privacy"]');
+            const formData = new FormData(quoteForm);
+
+            if (privacyCheckbox) {
+                formData.set('privacy', privacyCheckbox.checked ? 'on' : '');
             }
-            
-            // Email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                alert('Veuillez entrer une adresse email valide.');
-                return;
+
+            try {
+                if (submitBtn) {
+                    submitBtn.disabled = true;
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Envoi...';
+                }
+
+                const endpoint = quoteForm.getAttribute('action') || 'api/devis.php';
+                const response = await fetch(endpoint, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+                if (response.ok && result.success) {
+                    alert(result.message || 'Votre demande de devis a été envoyée avec succès.');
+                    quoteForm.reset();
+                } else {
+                    const message = result.errors ? result.errors.join('\n') : (result.message || 'Erreur lors de l\'envoi');
+                    alert(message);
+                }
+            } catch (error) {
+                console.error('Erreur devis:', error);
+                alert('Erreur de connexion au serveur');
+            } finally {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = 'Envoyer la demande de devis';
+                }
             }
-            
-            // Phone validation
-            const phoneRegex = /^[0-9+\s()-]{8,15}$/;
-            if (!phoneRegex.test(phone)) {
-                alert('Veuillez entrer un numéro de téléphone valide.');
-                return;
-            }
-            
-            // Simulate form submission
-            alert('Votre demande de devis a été envoyée avec succès. Notre équipe vous contactera dans les plus brefs délais pour discuter de votre projet.');
-            quoteForm.reset();
         });
     }
 

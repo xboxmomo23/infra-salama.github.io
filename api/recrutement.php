@@ -4,10 +4,15 @@ header('Content-Type: application/json');
 
 require_once __DIR__ . '/../config/mailer.php';
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    http_response_code(405);
-    echo json_encode(['success' => false, 'message' => 'Méthode non autorisée']);
+function jsonResponse($status, $payload)
+{
+    http_response_code($status);
+    echo json_encode($payload);
     exit;
+}
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    jsonResponse(405, ['success' => false, 'message' => 'Méthode non autorisée']);
 }
 
 // Champs requis
@@ -38,9 +43,7 @@ if (!isset($_FILES['resume']) || $_FILES['resume']['error'] === UPLOAD_ERR_NO_FI
 }
 
 if (!empty($errors)) {
-    http_response_code(400);
-    echo json_encode(['success' => false, 'errors' => $errors]);
-    exit;
+    jsonResponse(400, ['success' => false, 'errors' => $errors]);
 }
 
 // Validation du type et de la taille du fichier CV
@@ -51,21 +54,23 @@ $fileType = $_FILES['resume']['type'];
 $fileSize = $_FILES['resume']['size'];
 
 if (!in_array($fileType, $allowedTypes)) {
-    http_response_code(400);
-    echo json_encode(['success' => false, 'message' => 'Format de CV non autorisé. Utilisez PDF, DOC ou DOCX']);
-    exit;
+    jsonResponse(400, ['success' => false, 'message' => 'Format de CV non autorisé. Utilisez PDF, DOC ou DOCX']);
 }
 
 if ($fileSize > $maxSize) {
-    http_response_code(400);
-    echo json_encode(['success' => false, 'message' => 'Le CV ne doit pas dépasser 5MB']);
-    exit;
+    jsonResponse(400, ['success' => false, 'message' => 'Le CV ne doit pas dépasser 5MB']);
 }
 
 // Créer le dossier uploads si n'existe pas
 $uploadDir = __DIR__ . '/../uploads/cv/';
 if (!file_exists($uploadDir)) {
-    mkdir($uploadDir, 0755, true);
+    if (!mkdir($uploadDir, 0755, true)) {
+        jsonResponse(500, ['success' => false, 'message' => 'Impossible de créer le dossier CV (uploads/cv). Vérifiez les permissions.']);
+    }
+}
+
+if (!is_writable($uploadDir)) {
+    jsonResponse(500, ['success' => false, 'message' => 'Le dossier uploads/cv n\'est pas accessible en écriture.']);
 }
 
 // Générer un nom unique pour le fichier
@@ -75,9 +80,7 @@ $uploadPath = $uploadDir . $fileName;
 
 // Déplacer le fichier uploadé
 if (!move_uploaded_file($_FILES['resume']['tmp_name'], $uploadPath)) {
-    http_response_code(500);
-    echo json_encode(['success' => false, 'message' => 'Erreur lors de la sauvegarde du CV']);
-    exit;
+    jsonResponse(500, ['success' => false, 'message' => 'Erreur lors de la sauvegarde du CV (max ' . ini_get('upload_max_filesize') . ' / ' . ini_get('post_max_size') . ').']);
 }
 
 // Préparer les données
@@ -99,31 +102,27 @@ try {
     $sent = $mailer->sendRecruitmentForm($data);
 
     if ($sent) {
-        echo json_encode([
+        jsonResponse(200, [
             'success' => true,
             'message' => 'Votre candidature a été envoyée avec succès. Nous examinerons votre profil et vous contacterons si votre candidature correspond à nos besoins.'
         ]);
-    } else {
-        // Supprimer le fichier si l'envoi échoue
-        if (file_exists($uploadPath)) {
-            unlink($uploadPath);
-        }
-
-        http_response_code(500);
-        echo json_encode([
-            'success' => false,
-            'message' => 'Une erreur est survenue lors de l\'envoi. Veuillez réessayer.'
-        ]);
     }
-} catch (Exception $e) {
-    // Supprimer le fichier en cas d'erreur
+
     if (file_exists($uploadPath)) {
         unlink($uploadPath);
     }
 
-    http_response_code(500);
+    jsonResponse(500, [
+        'success' => false,
+        'message' => 'Une erreur est survenue lors de l\'envoi. Veuillez réessayer.'
+    ]);
+} catch (Exception $e) {
+    if (file_exists($uploadPath)) {
+        unlink($uploadPath);
+    }
+
     error_log("Erreur API recrutement: " . $e->getMessage());
-    echo json_encode([
+    jsonResponse(500, [
         'success' => false,
         'message' => 'Erreur serveur. Veuillez contacter l\'administrateur.'
     ]);

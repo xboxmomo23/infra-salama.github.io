@@ -196,6 +196,7 @@
                           type="text"
                           class="form-control"
                           id="firstName"
+                          name="firstName"
                           placeholder="Votre prénom"
                           required
                         />
@@ -206,6 +207,7 @@
                           type="text"
                           class="form-control"
                           id="lastName"
+                          name="lastName"
                           placeholder="Votre nom"
                           required
                         />
@@ -218,6 +220,7 @@
                           type="email"
                           class="form-control"
                           id="email"
+                          name="email"
                           placeholder="Votre email"
                           required
                         />
@@ -228,6 +231,7 @@
                           type="tel"
                           class="form-control"
                           id="phone"
+                          name="phone"
                           placeholder="Votre numéro de téléphone"
                           required
                         />
@@ -249,6 +253,7 @@
                         type="text"
                         class="form-control"
                         id="establishmentName"
+                        name="establishmentName"
                         placeholder="Nom de votre établissement"
                         required
                       />
@@ -260,6 +265,7 @@
                       <select
                         class="form-select"
                         id="establishmentType"
+                        name="establishmentType"
                         required
                       >
                         <option value="" selected disabled>
@@ -279,6 +285,7 @@
                         type="text"
                         class="form-control"
                         id="address"
+                        name="address"
                         placeholder="Adresse de l'établissement"
                         required
                       />
@@ -290,6 +297,7 @@
                           type="text"
                           class="form-control"
                           id="city"
+                          name="city"
                           placeholder="Ville"
                           required
                         />
@@ -302,6 +310,7 @@
                           type="text"
                           class="form-control"
                           id="postalCode"
+                          name="postalCode"
                           placeholder="Code postal"
                           required
                         />
@@ -324,7 +333,8 @@
                         <input
                           class="form-check-input"
                           type="checkbox"
-                          value="network-installation"
+                          value="on"
+                          name="networkInstallation"
                           id="networkInstallation"
                         />
                         <label
@@ -338,7 +348,8 @@
                         <input
                           class="form-check-input"
                           type="checkbox"
-                          value="infrastructure-audit"
+                          value="on"
+                          name="infrastructureAudit"
                           id="infrastructureAudit"
                         />
                         <label
@@ -352,7 +363,8 @@
                         <input
                           class="form-check-input"
                           type="checkbox"
-                          value="network-security"
+                          value="on"
+                          name="networkSecurity"
                           id="networkSecurity"
                         />
                         <label class="form-check-label" for="networkSecurity">
@@ -363,7 +375,8 @@
                         <input
                           class="form-check-input"
                           type="checkbox"
-                          value="wifi-solutions"
+                          value="on"
+                          name="wifiSolutions"
                           id="wifiSolutions"
                         />
                         <label class="form-check-label" for="wifiSolutions">
@@ -374,7 +387,8 @@
                         <input
                           class="form-check-input"
                           type="checkbox"
-                          value="server-management"
+                          value="on"
+                          name="serverManagement"
                           id="serverManagement"
                         />
                         <label class="form-check-label" for="serverManagement">
@@ -385,7 +399,8 @@
                         <input
                           class="form-check-input"
                           type="checkbox"
-                          value="technical-support"
+                          value="on"
+                          name="technicalSupport"
                           id="technicalSupport"
                         />
                         <label class="form-check-label" for="technicalSupport">
@@ -400,6 +415,7 @@
                       <select
                         class="form-select"
                         id="establishmentSize"
+                        name="establishmentSize"
                         required
                       >
                         <option value="" selected disabled>
@@ -426,6 +442,7 @@
                       <select
                         class="form-select"
                         id="existingInfrastructure"
+                        name="existingInfrastructure"
                         required
                       >
                         <option value="" selected disabled>
@@ -449,7 +466,7 @@
                       <label for="budget" class="form-label"
                         >Budget approximatif (en DZD)</label
                       >
-                      <select class="form-select" id="budget">
+                      <select class="form-select" id="budget" name="budget">
                         <option value="" selected disabled>
                           Sélectionnez une fourchette de budget
                         </option>
@@ -468,7 +485,7 @@
                       <label for="timeline" class="form-label"
                         >Délai souhaité pour la réalisation</label
                       >
-                      <select class="form-select" id="timeline" required>
+                      <select class="form-select" id="timeline" name="timeline" required>
                         <option value="" selected disabled>
                           Sélectionnez un délai
                         </option>
@@ -487,6 +504,7 @@
                       <textarea
                         class="form-control"
                         id="projectDescription"
+                        name="projectDescription"
                         rows="5"
                         placeholder="Décrivez votre projet et vos besoins spécifiques"
                         required
@@ -504,7 +522,7 @@
                       <label for="hearAboutUs" class="form-label"
                         >Comment avez-vous entendu parler de nous ?</label
                       >
-                      <select class="form-select" id="hearAboutUs">
+                      <select class="form-select" id="hearAboutUs" name="hearAboutUs">
                         <option value="" selected disabled>
                           Sélectionnez une option
                         </option>
@@ -522,6 +540,7 @@
                       <textarea
                         class="form-control"
                         id="additionalInfo"
+                        name="additionalInfo"
                         rows="3"
                         placeholder="Toute information supplémentaire que vous souhaitez partager"
                       ></textarea>
@@ -531,6 +550,7 @@
                         class="form-check-input"
                         type="checkbox"
                         id="privacy"
+                        name="privacy"
                         required
                       />
                       <label class="form-check-label" for="privacy">
@@ -808,8 +828,8 @@
             <h5 class="text-white">Contact</h5>
             <ul class="footer-contact">
               <li><i class="fas fa-map-marker-alt"></i> Oran, Algérie</li>
-              <li><i class="fas fa-phone"></i> +213 XX XX XX XX</li>
-              <li><i class="fas fa-envelope"></i> infrasalama@gmail.com</li>
+              <li><i class="fas fa-phone"></i> 07 71 88 14 69</li>
+              <li><i class="fas fa-envelope"></i> contact@infrasalama.com</li>
             </ul>
             <div class="newsletter">
               <h5 class="text-white">Newsletter</h5>
@@ -833,7 +853,7 @@
         <div class="row">
           <div class="col-md-6 text-center text-md-start">
             <p class="mb-0 text-white-50">
-              &copy; 2023 Infra Salama. Tous droits réservés.
+              &copy; 2026 Infra Salama. Tous droits réservés.
             </p>
           </div>
           <div class="col-md-6 text-center text-md-end">

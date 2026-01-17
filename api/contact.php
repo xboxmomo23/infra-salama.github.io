@@ -4,11 +4,15 @@ header('Content-Type: application/json');
 
 require_once __DIR__ . '/../config/mailer.php';
 
-// Vérifier que c'est une requête POST
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    http_response_code(405);
-    echo json_encode(['success' => false, 'message' => 'Méthode non autorisée']);
+function jsonResponse($status, $payload)
+{
+    http_response_code($status);
+    echo json_encode($payload);
     exit;
+}
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    jsonResponse(405, ['success' => false, 'message' => 'Méthode non autorisée']);
 }
 
 // Validation des champs requis
@@ -32,9 +36,7 @@ if (!isset($_POST['privacy']) || $_POST['privacy'] !== 'on') {
 }
 
 if (!empty($errors)) {
-    http_response_code(400);
-    echo json_encode(['success' => false, 'errors' => $errors]);
-    exit;
+    jsonResponse(400, ['success' => false, 'errors' => $errors]);
 }
 
 // Nettoyer les données
@@ -52,21 +54,19 @@ try {
     $sent = $mailer->sendContactForm($data);
 
     if ($sent) {
-        echo json_encode([
+        jsonResponse(200, [
             'success' => true,
             'message' => 'Votre message a été envoyé avec succès. Nous vous répondrons dans les plus brefs délais.'
         ]);
-    } else {
-        http_response_code(500);
-        echo json_encode([
-            'success' => false,
-            'message' => 'Une erreur est survenue lors de l\'envoi. Veuillez réessayer.'
-        ]);
     }
+
+    jsonResponse(500, [
+        'success' => false,
+        'message' => 'Une erreur est survenue lors de l\'envoi. Veuillez réessayer.'
+    ]);
 } catch (Exception $e) {
-    http_response_code(500);
     error_log("Erreur API contact: " . $e->getMessage());
-    echo json_encode([
+    jsonResponse(500, [
         'success' => false,
         'message' => 'Erreur serveur. Veuillez contacter l\'administrateur.'
     ]);

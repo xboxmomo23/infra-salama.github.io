@@ -753,7 +753,7 @@
     </section>
 
     <!-- Meet Our Team Section -->
-    <section class="team-section">
+    <!-- <section class="team-section">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-8">
@@ -768,7 +768,7 @@
         </div>
 
         <div class="row">
-          <!-- Team Member 1 -->
+          
           <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up">
             <div class="team-card">
               <div class="team-img">
@@ -791,7 +791,7 @@
             </div>
           </div>
 
-          <!-- Team Member 2 -->
+          
           <div
             class="col-lg-3 col-md-6 mb-4"
             data-aos="fade-up"
@@ -816,7 +816,7 @@
             </div>
           </div>
 
-          <!-- Team Member 3 -->
+        
           <div
             class="col-lg-3 col-md-6 mb-4"
             data-aos="fade-up"
@@ -842,7 +842,7 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <!-- Current Openings Section -->
     <section
@@ -1429,8 +1429,8 @@
             <h5 class="text-white">Contact</h5>
             <ul class="footer-contact">
               <li><i class="fas fa-map-marker-alt"></i> Oran, Algérie</li>
-              <li><i class="fas fa-phone"></i> +213 XX XX XX XX</li>
-              <li><i class="fas fa-envelope"></i> infrasalama@gmail.com</li>
+              <li><i class="fas fa-phone"></i> 07 71 88 14 69</li>
+              <li><i class="fas fa-envelope"></i> contact@infrasalama.com</li>
             </ul>
             <div class="newsletter">
               <h5 class="text-white">Newsletter</h5>
@@ -1454,7 +1454,7 @@
         <div class="row">
           <div class="col-md-6 text-center text-md-start">
             <p class="mb-0 text-white-50">
-              &copy; 2023 Infra Salama. Tous droits réservés.
+              &copy; 2026 Infra Salama. Tous droits réservés.
             </p>
           </div>
           <div class="col-md-6 text-center text-md-end">
@@ -1515,7 +1515,7 @@
 
             const result = await response.json();
 
-            if (result.success) {
+            if (response.ok && result.success) {
               alert("✅ " + result.message);
               this.reset();
               // Scroll vers le haut

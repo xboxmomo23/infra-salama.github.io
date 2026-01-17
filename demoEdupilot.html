@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
@@ -996,8 +996,8 @@
             <h5 class="text-white">Contact</h5>
             <ul class="footer-contact">
               <li><i class="fas fa-map-marker-alt"></i> Oran, Algérie</li>
-              <li><i class="fas fa-phone"></i> +213 XX XX XX XX</li>
-              <li><i class="fas fa-envelope"></i> infrasalama@gmail.com</li>
+              <li><i class="fas fa-phone"></i> 07 71 88 14 69</li>
+              <li><i class="fas fa-envelope"></i> contact@infrasalama.com</li>
             </ul>
           </div>
         </div>
@@ -1005,7 +1005,7 @@
         <div class="row">
           <div class="col-md-6 text-center text-md-start">
             <p class="mb-0 text-white-50">
-              &copy; 2025 Infra Salama. Tous droits réservés.
+              &copy; 2026 Infra Salama. Tous droits réservés.
             </p>
           </div>
           <div class="col-md-6 text-center text-md-end">
@@ -1035,24 +1035,58 @@
         offset: 100,
       });
 
-      // Form Submission Handler
-      document
-        .getElementById("demoForm")
-        .addEventListener("submit", function (e) {
-          e.preventDefault();
+      const demoForm = document.getElementById("demoForm");
+      const successModal = document.getElementById("successModal");
 
-          // Simuler l'envoi (à remplacer par votre logique backend)
-          // Dans un vrai cas, vous utiliseriez AJAX ou fetch pour envoyer les données
+      demoForm.addEventListener("submit", async function (e) {
+        e.preventDefault();
 
-          // Afficher la modale de succès
-          document.getElementById("successModal").classList.add("active");
+        const submitBtn = demoForm.querySelector('button[type="submit"]');
+        const acceptDemo = demoForm.querySelector('input[name="acceptDemo"]');
+        const rgpd = demoForm.querySelector('input[name="rgpd"]');
+        const formData = new FormData(demoForm);
 
-          // Réinitialiser le formulaire
-          this.reset();
+        if (acceptDemo) {
+          formData.set("acceptDemo", acceptDemo.checked ? "on" : "");
+        }
+        if (rgpd) {
+          formData.set("rgpd", rgpd.checked ? "on" : "");
+        }
 
-          // En production, décommentez pour envoyer vraiment :
-          // this.submit();
-        });
+        try {
+          if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.innerHTML =
+              '<i class="fas fa-spinner fa-spin me-2"></i>Envoi...';
+          }
+
+          const endpoint = demoForm.getAttribute("action") || "api/demo.php";
+          const response = await fetch(endpoint, {
+            method: "POST",
+            body: formData,
+          });
+
+          const result = await response.json();
+
+          if (response.ok && result.success) {
+            successModal.classList.add("active");
+            demoForm.reset();
+          } else {
+            const message = result.errors
+              ? result.errors.join("\n")
+              : result.message || "Erreur lors de l'envoi";
+            alert(message);
+          }
+        } catch (error) {
+          console.error("Erreur:", error);
+          alert("Erreur de connexion au serveur");
+        } finally {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = "Envoyer ma demande";
+          }
+        }
+      });
 
       function closeModal() {
         document.getElementById("successModal").classList.remove("active");
