@@ -758,6 +758,118 @@ a:hover {
   color: var(--white-color);
 }
 
+/* ===== TESTIMONIALS SECTION ===== */
+.testimonials-edupilot {
+  background-color: #f8f9fa;
+  padding: 5rem 0;
+}
+
+.testimonials-edupilot .section-title {
+  font-size: 2rem;
+  margin-bottom: 0.4rem;
+}
+
+/* Carte témoignage */
+.testi-card {
+  background-color: var(--white-color);
+  border-radius: 15px;
+  padding: 2rem;
+  height: 100%;
+  box-shadow: 0 4px 20px rgba(0, 86, 179, 0.08);
+  border: 1px solid rgba(0, 86, 179, 0.08);
+  transition: var(--transition);
+  position: relative;
+}
+
+.testi-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 86, 179, 0.15);
+  border-color: rgba(0, 86, 179, 0.2);
+}
+
+/* Guillemet décoratif en haut de la carte */
+.testi-card::before {
+  content: "\201C"; /* guillemet ouvrant typographique */
+  font-size: 5rem;
+  font-family: Georgia, serif;
+  color: rgba(0, 86, 179, 0.12);
+  position: absolute;
+  top: -10px;
+  left: 18px;
+  line-height: 1;
+}
+
+/* Étoiles jaunes */
+.testi-stars {
+  color: #f5a623;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  letter-spacing: 2px;
+}
+
+/* Citation en italique */
+.testi-quote {
+  font-style: italic;
+  color: var(--text-color);
+  font-size: 0.98rem;
+  line-height: 1.75;
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Bloc auteur */
+.testi-author {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-top: 1px solid var(--light-gray-color);
+  padding-top: 1.2rem;
+}
+
+/* Avatar générique (silhouette) */
+.testi-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0056b3 0%, #667eea 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.testi-avatar i {
+  color: #fff;
+  font-size: 1.4rem;
+}
+
+/* Nom & fonction */
+.testi-name {
+  font-weight: 700;
+  color: var(--primary-color); /* bleu accentué */
+  font-size: 0.95rem;
+  margin-bottom: 0.1rem;
+  /* Pour anonymiser : commentez la ligne ci-dessous et remplacez par "..." */
+}
+
+.testi-role {
+  color: var(--gray-color);
+  font-size: 0.85rem;
+}
+
+/* Badge "Retour terrain" optionnel */
+.testi-badge {
+  display: inline-block;
+  background: rgba(0, 86, 179, 0.1);
+  color: var(--primary-color);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 50px;
+  margin-bottom: 1.5rem;
+}
+
 /* ===== RESPONSIVE STYLES ===== */
 @media (max-width: 991.98px) {
   [data-aos="fade-left"]:not(.aos-animate),
