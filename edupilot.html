@@ -4,11 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
-      EduPilot | Plateforme de gestion scolaire moderne | Infra Salama
+      Sahliya | Plateforme de gestion scolaire moderne | Infra Salama
     </title>
     <meta
       name="description"
-      content="EduPilot : solution complète de gestion scolaire développée par Infra Salama. Emplois du temps, notes, présences, communication école-parents."
+      content="Sahliya : solution complète de gestion scolaire développée par Infra Salama. Emplois du temps, notes, présences, communication école-parents."
     />
     <link rel="canonical" href="https://infrasalama.com/edupilot.html" />
 
@@ -27,17 +27,18 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css" />
 
-    <!-- EduPilot Specific Styles -->
+    <!-- Sahliya Specific Styles -->
     <style>
-      /* Hero Section EduPilot */
-      .edupilot-hero {
+      /* Hero Section Sahliya */
+      .sahliya-hero {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         padding: 180px 0 120px;
         position: relative;
         overflow: hidden;
+        isolation: isolate; /* Permet à mix-blend-mode de ne pas affecter le reste */
       }
 
-      .edupilot-hero::before {
+      .sahliya-hero::before {
         content: "";
         position: absolute;
         top: 0;
@@ -48,15 +49,18 @@
         opacity: 0.4;
       }
 
-      .edupilot-hero .container {
+      .sahliya-hero .container {
         position: relative;
         z-index: 2;
       }
 
-      /* Logo EduPilot dans Hero */
-      .edupilot-logo {
+      /* Logo Sahliya dans Hero */
+      .sahliya-logo {
         max-width: 200px;
         margin-bottom: 20px;
+        background: transparent;
+        /* Si ton PNG contient un fond blanc carré, ce mode le rendra "invisible" sur le fond sombre */
+        mix-blend-mode: multiply;
         filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
         animation: fadeInDown 1s ease-out;
       }
@@ -72,7 +76,7 @@
         }
       }
 
-      .edupilot-hero h1 {
+      .sahliya-hero h1 {
         font-size: 3.5rem;
         font-weight: 800;
         color: #fff;
@@ -80,14 +84,14 @@
         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       }
 
-      .edupilot-hero p.lead {
+      .sahliya-hero p.lead {
         font-size: 1.4rem;
         color: rgba(255, 255, 255, 0.95);
         margin-bottom: 2.5rem;
         line-height: 1.7;
       }
 
-      .edupilot-hero .btn {
+      .sahliya-hero .btn {
         padding: 15px 40px;
         font-size: 1.1rem;
         font-weight: 600;
@@ -96,23 +100,23 @@
         transition: all 0.3s ease;
       }
 
-      .edupilot-hero .btn-light {
+      .sahliya-hero .btn-light {
         background: #fff;
         color: #667eea;
         border: none;
       }
 
-      .edupilot-hero .btn-light:hover {
+      .sahliya-hero .btn-light:hover {
         transform: translateY(-3px);
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
       }
 
-      .edupilot-hero .btn-outline-light {
+      .sahliya-hero .btn-outline-light {
         border: 2px solid #fff;
         color: #fff;
       }
 
-      .edupilot-hero .btn-outline-light:hover {
+      .sahliya-hero .btn-outline-light:hover {
         background: #fff;
         color: #667eea;
         transform: translateY(-3px);
@@ -337,26 +341,26 @@
       }
 
       /* CTA Section */
-      .cta-edupilot {
+      .cta-sahliya {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         padding: 100px 0;
         color: #fff;
         text-align: center;
       }
 
-      .cta-edupilot h2 {
+      .cta-sahliya h2 {
         font-size: 3rem;
         font-weight: 800;
         margin-bottom: 20px;
       }
 
-      .cta-edupilot p {
+      .cta-sahliya p {
         font-size: 1.3rem;
         margin-bottom: 40px;
         opacity: 0.95;
       }
 
-      .cta-edupilot .btn {
+      .cta-sahliya .btn {
         padding: 18px 50px;
         font-size: 1.2rem;
         font-weight: 700;
@@ -366,19 +370,19 @@
 
       /* Responsive */
       @media (max-width: 768px) {
-        .edupilot-hero h1 {
+        .sahliya-hero h1 {
           font-size: 2.5rem;
         }
 
-        .edupilot-hero p.lead {
+        .sahliya-hero p.lead {
           font-size: 1.1rem;
         }
 
-        .edupilot-logo {
+        .sahliya-logo {
           max-width: 150px;
         }
 
-        .cta-edupilot h2 {
+        .cta-sahliya h2 {
           font-size: 2rem;
         }
       }
@@ -433,7 +437,7 @@
                 <li><hr class="dropdown-divider" /></li>
                 <li>
                   <a class="dropdown-item active" href="edupilot.html">
-                    <i class="fas fa-graduation-cap me-2"></i>EduPilot
+                    <i class="fas fa-graduation-cap me-2"></i>Sahliya
                   </a>
                 </li>
               </ul>
@@ -461,22 +465,22 @@
     </nav>
 
     <!-- Hero Section avec Logo -->
-    <section class="edupilot-hero">
+    <section class="sahliya-hero">
       <div class="container">
         <div class="row justify-content-center text-center">
           <div class="col-lg-10" data-aos="fade-up">
-            <!-- LOGO EDUPILOT - Mettez votre logo ici -->
+            <!-- LOGO SAHLIYA - Mettez votre logo ici -->
             <img
-              src="img/logo-edupilot.png"
-              alt="Logo EduPilot"
-              class="edupilot-logo"
+              src="img/logo2d-sahliya.jpg"
+              alt="Logo Sahliya"
+              class="sahliya-logo"
             />
             <!-- Alternative si vous n'avez pas encore le logo : -->
             <!-- <div style="background: rgba(255,255,255,0.2); padding: 15px 40px; border-radius: 50px; display: inline-block; margin-bottom: 20px;">
-              <h2 style="margin: 0; color: #fff; font-size: 2rem; font-weight: 800;">EduPilot</h2>
+              <h2 style="margin: 0; color: #fff; font-size: 2rem; font-weight: 800;">Sahliya</h2>
             </div> -->
 
-            <h1>EduPilot</h1>
+            <h1>Sahliya</h1>
             <p class="lead">
               La plateforme numérique complète pour moderniser la gestion de
               votre établissement scolaire
@@ -500,7 +504,7 @@
         <div class="row justify-content-center">
           <div class="col-lg-10" data-aos="fade-up">
             <div class="text-center mb-5">
-              <h2 class="section-title">Découvrez EduPilot en vidéo</h2>
+              <h2 class="section-title">Découvrez Sahliya en vidéo</h2>
               <p class="section-subtitle">
                 Une démonstration complète de la plateforme
               </p>
@@ -538,9 +542,9 @@
       <div class="container">
         <div class="row justify-content-center mb-5">
           <div class="col-lg-8 text-center" data-aos="fade-up">
-            <h2 class="section-title">Qu'est-ce qu'EduPilot ?</h2>
+            <h2 class="section-title">Qu'est-ce que Sahliya ?</h2>
             <p class="lead">
-              EduPilot est une solution de gestion scolaire complète, développée
+              Sahliya est une solution de gestion scolaire complète, développée
               par Infra Salama pour digitaliser et simplifier la gestion
               quotidienne des établissements éducatifs en Algérie.
             </p>
@@ -550,7 +554,7 @@
         <div class="row justify-content-center mb-5">
           <div class="col-lg-10" data-aos="fade-up">
             <div class="text-center p-5 bg-light rounded-3">
-              <h3 class="mb-4">À qui s'adresse EduPilot ?</h3>
+              <h3 class="mb-4">À qui s'adresse Sahliya ?</h3>
               <div class="row">
                 <div class="col-md-3 mb-3">
                   <div class="p-3">
@@ -707,7 +711,7 @@
         <div class="row justify-content-center mb-5">
           <div class="col-lg-8 text-center" data-aos="fade-up">
             <h2 class="mb-4" style="font-size: 3rem; font-weight: 800">
-              Pourquoi choisir EduPilot ?
+              Pourquoi choisir Sahliya ?
             </h2>
             <p class="lead">
               Des avantages concrets pour toutes les parties prenantes
@@ -775,7 +779,7 @@
               L'expertise infrastructure au service de l'éducation
             </h2>
             <p class="lead mb-4">
-              EduPilot n'est pas qu'un simple logiciel : c'est une solution
+              Sahliya n'est pas qu'un simple logiciel : c'est une solution
               complète développée, déployée et maintenue par Infra Salama, votre
               partenaire IT de confiance.
             </p>
@@ -796,7 +800,11 @@
             </div>
             <div class="mb-4">
               <i class="fas fa-check-circle me-2" style="color: #667eea"></i>
-              <strong>Solution 100% algérienne</strong> : Développée localement
+              <strong
+                >Solution 100% maghrébine (Algérie, Tunisie, Maroc et Afrique du
+                Nord)</strong
+              >
+              : Développée localement
               pour répondre aux besoins spécifiques de notre système éducatif
             </div>
             <a href="index.html" class="btn btn-primary btn-lg">
@@ -815,7 +823,7 @@
               <h4 class="mb-3">Infrastructure IT + Solution Logicielle</h4>
               <p>
                 Bénéficiez de notre expertise complète : de l'installation de
-                votre réseau scolaire au déploiement d'EduPilot, nous gérons
+                votre réseau scolaire au déploiement de Sahliya, nous gérons
                 tout pour vous.
               </p>
             </div>
@@ -830,7 +838,7 @@
          Format : 4 cartes en grille 2×2, avec avatar
          silhouette et étoiles Font Awesome.
     ================================================= -->
-    <section class="testimonials-edupilot">
+    <section class="testimonials-sahliya">
       <div class="container">
         <!-- En-tête de section -->
         <div class="row justify-content-center mb-5" data-aos="fade-up">
@@ -841,7 +849,7 @@
             <h2 class="section-title">Ce que disent les établissements</h2>
             <p class="section-subtitle">
               Premiers retours qualitatifs de directeurs, enseignants et parents
-              ayant découvert EduPilot
+              ayant découvert Sahliya
             </p>
           </div>
         </div>
@@ -859,7 +867,7 @@
                 <i class="fas fa-star"></i>
               </div>
               <p class="testi-quote">
-                "EduPilot répond exactement à nos besoins quotidiens : plus
+                "Sahliya répond exactement à nos besoins quotidiens : plus
                 besoin de courir après les justificatifs d'absence ou de refaire
                 les emplois du temps à la main. Le pilote gratuit nous permet de
                 tester sans risque."
@@ -971,13 +979,13 @@
     <!-- =============== FIN SECTION TÉMOIGNAGES edupilot.html =============== -->
 
     <!-- Final CTA -->
-    <section class="cta-edupilot" id="demo">
+    <section class="cta-sahliya" id="demo">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-10" data-aos="fade-up">
             <h2>Prêt à transformer votre établissement ?</h2>
             <p>
-              Demandez une démonstration gratuite et découvrez comment EduPilot
+              Demandez une démonstration gratuite et découvrez comment Sahliya
               peut simplifier la gestion de votre école.
             </p>
             <div>
@@ -1032,7 +1040,7 @@
             <h5 class="text-white">Solutions</h5>
             <ul class="footer-links">
               <li><a href="infrastructure.html">Infrastructure IT</a></li>
-              <li><a href="edupilot.html">EduPilot</a></li>
+              <li><a href="edupilot.html">Sahliya</a></li>
             </ul>
           </div>
           <div class="col-lg-2 col-md-4 mb-4 mb-md-0">

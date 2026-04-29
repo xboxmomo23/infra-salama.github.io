@@ -109,13 +109,13 @@ class MailerService
     }
 
     /**
-     * Envoie un email de demande de démo EduPilot
+     * Envoie un email de demande de démo Sahliya
      */
     public function sendDemoForm($data)
     {
         try {
             $this->setRecipients(env('DEMO_TO', env('MAIL_TO_ADDRESS')));
-            $this->mailer->Subject = 'Demande de démo EduPilot - ' . ($data['nomEtablissement'] ?? 'N/A');
+            $this->mailer->Subject = 'Demande de démo Sahliya - ' . ($data['nomEtablissement'] ?? 'N/A');
 
             $this->mailer->Body = $this->getDemoEmailTemplate($data);
             $this->mailer->AltBody = $this->getDemoEmailPlainText($data);
@@ -406,7 +406,7 @@ class MailerService
         <body>
             <div class='container'>
                 <div class='header'>
-                    <h2>Demande de démo EduPilot</h2>
+                    <h2>Demande de démo Sahliya</h2>
                 </div>
                 
                 <div class='section'>
