@@ -47,6 +47,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Floating WhatsApp Button
+    const whatsappLink = document.createElement('a');
+    whatsappLink.href = 'https://wa.me/33771881469';
+    whatsappLink.target = '_blank';
+    whatsappLink.rel = 'noopener';
+    whatsappLink.className = 'whatsapp-float';
+    whatsappLink.setAttribute('aria-label', 'Contacter Infra Salama sur WhatsApp');
+    whatsappLink.innerHTML = '<i class="fab fa-whatsapp" aria-hidden="true"></i>';
+    document.body.appendChild(whatsappLink);
+
     // Form Validation and Submission
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
